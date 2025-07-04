@@ -2,15 +2,15 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Thiệp Sinh Nhật – Hồng Ngọc</title>
+  <title> Thiệp Sinh Nhật – Hồng Ngọc</title>
   <style>
     html, body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #e0bbf7, #c2e4ff); 
-  overflow-x: hidden;
-}
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #e0bbf7, #c2e4ff); 
+      overflow-x: hidden;
+    }
     .intro, .card {
       position: absolute;
       width: 100%;
@@ -21,19 +21,16 @@
       flex-direction: column;
       transition: 1s ease;
     }
-
     .intro {
-    background: url("bg.png") no-repeat center center fixed;
-  background-size: cover;
+      background: url("bg.png") no-repeat center center fixed;
+      background-size: cover;
       z-index: 10;
     }
-
     .intro h1 {
       color: #7c3aed;
       font-size: 28px;
       margin-bottom: 20px;
     }
-
     .intro button {
       padding: 12px 24px;
       font-size: 16px;
@@ -44,46 +41,37 @@
       cursor: pointer;
       transition: background 0.3s;
     }
-
     .intro button:hover {
       background-color: #7c3aed;
     }
-
     .card {
       opacity: 0;
       pointer-events: none;
       flex-direction: column;
       text-align: center;
     }
-
     .card.active {
       opacity: 1;
       pointer-events: all;
       z-index: 5;
     }
-
     .card img {
       width: 300px;
       border-radius: 12px;
       margin-bottom: 20px;
     }
-
     .card h2 {
       color: #6d28d9;
       font-size: 24px;
     }
-
     .card p {
       color: #374151;
       margin: 10px 20px;
       max-width: 500px;
     }
-
     audio {
       margin-top: 10px;
     }
-
-    /* Tim rơi */
     .heart {
       position: fixed;
       width: 20px;
@@ -92,7 +80,6 @@
       transform: rotate(45deg);
       animation: fall 6s linear infinite;
     }
-
     .heart::before, .heart::after {
       content: '';
       position: absolute;
@@ -101,28 +88,22 @@
       background: pink;
       border-radius: 50%;
     }
-
     .heart::before { top: -10px; left: 0; }
     .heart::after  { top: 0; left: -10px; }
-
     @keyframes fall {
       0% { transform: translateY(-100px) rotate(45deg); opacity: 1; }
       100% { transform: translateY(100vh) rotate(45deg); opacity: 0; }
     }
-
-    /* Hoa bay */
     .flower {
       position: absolute;
       font-size: 22px;
       animation: fly 12s linear infinite;
       z-index: 0;
     }
-
     @keyframes fly {
       0% { transform: translateY(-50px) rotate(0); opacity: 1; }
       100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
     }
-
     canvas {
       position: fixed;
       top: 0;
@@ -150,6 +131,7 @@
     Trình duyệt không hỗ trợ nhạc nền.
   </audio>
 </div>
+
 <!-- Tim rơi -->
 <script>
   function createHeart() {
@@ -242,54 +224,40 @@
 
 <!-- Xử lý hiển thị -->
 <script>
-  function showCard() {
-    document.getElementById('intro').style.display = 'none';
-    document.getElementById('card').classList.add('active');
-  }
-<script>
   const blessingLines = [
-    "1. Hôm nay là sinh nhật bạn – người mình thương quý suốt mấy năm qua 🎉",
-    "2. 19 tuổi rồi đó, bạn nớ lớn thật rồi hen 💜",
-    "3. Mình chúc bạn thiệt nhiều niềm vui, hạnh phúc và yêu thương",
-    "4. Chúc bạn luôn dịu dàng, nhưng cũng mạnh mẽ khi cần nha",
-    "5. Bạn là một người đặc biệt – với chính bạn và với mình nữa",
-    "6. Mong bạn luôn sống thật với lòng mình, không cần gồng gánh điều chi",
-    "7. Bạn với mình đi qua 7-8 năm trời rồi, có chi cũng đáng trân quý thiệt",
-    "8. Nhớ mấy lần mình buồn, bạn chẳng nói nhiều mà vẫn ở đó, thầm lặng",
-    "9. Mình cảm ơn bạn vì những lần như rứa 🥹",
-    "10. Dù mình không ở gần – nhưng lòng thì luôn nhớ bạn",
-    "11. Nhìn lại, thấy thiệt may mắn vì có bạn bên cạnh thời ấy",
-    "12. Bạn giống mẹ mình lắm – từ cái cách quan tâm nhẹ nhàng 🫶",
-    "13. Nhưng bạn còn là bạn mình – duy nhất, riêng biệt và không thay thế được",
-    "14. Mình mong bạn luôn thấy được giá trị của bản thân mình",
-    "15. Và biết rằng: bạn xứng đáng với những điều thật tốt đẹp",
-    "16. Nếu bạn thấy mỏi, cứ nghỉ một chút, có mình ở đây nè",
-    "17. Có thể không giỏi nói lời ngọt ngào – nhưng lòng mình luôn ấm áp cho bạn",
-    "18. Mong bạn sẽ nhận được thật nhiều yêu thương – và không cần nghi ngờ chi cả",
-    "19. Có chuyện gì cũng đừng giấu mình nha",
-    "20. Mình sẵn lòng nghe, không cần lời giải thích, chỉ cần bạn nói",
-    "21. 19 tuổi là vừa đủ chín để mơ tiếp, vừa đủ trẻ để bắt đầu",
-    "22. Mình mong bạn vẫn giữ trong lòng những ước mơ của bạn nớ",
-    "23. Và đừng quên bạn của bạn nớ luôn ủng hộ bạn hết mình",
-    "24. Chúc bạn luôn yêu bản thân mình nhiều hơn một chút mỗi ngày",
-    "25. Và cười lên thiệt tươi dù đôi lúc có những điều buồn buồn",
-    "26. Mình tin: bạn là người đáng tin, đáng yêu và đáng thương",
-    "27. Không cần phải hoàn hảo – bạn như ri đã đủ để mình thương rồi",
-    "28. Mong mỗi mùa sinh nhật, bạn lại trưởng thành thêm một chút… mà vẫn ngây thơ như cũ",
-    "29. Mỗi năm một chút vui mới, một ít bình yên cũ",
-    "30. Và nếu có ai làm bạn buồn – mình sẽ là người giữ lấy bạn lại",
-    "31. Tình bạn của tụi mình – hy vọng là lâu dài, thiệt lâu",
-    "32. Như mùa hè nối mùa thu, như ngày nắng ấm dắt tay ngày mưa",
-    "33. Bạn là người mình nghĩ tới mỗi khi nhớ nhà, nhớ lớp, nhớ thời áo trắng",
-    "34. Và bạn là người mình nghĩ tới mỗi khi thấy ai đó giống bạn",
-    "35. Mình mong bạn biết: có mình luôn dõi theo bạn, từ xa cũng được",
-    "36. Ở đâu đó giữa thế giới này, bạn có một người thương bạn… là mình",
-    "37. Happy Birthday – to my precious friend, my “bạn nớ” 💌",
-    "38. May your days be filled with joy and your nights with gentle dreams",
-    "39. Cảm ơn bạn đã lớn lên cùng mình",
-    "40. Và cảm ơn bạn đã là “bạn của mình” – thiệt lòng ♥️"
+    "Hôm nay trời xanh mây trắng nắng vàng, là sn của HN🎉",
+    "19 tuổi rồi đó, nhanh thế (vẫn đang tự thấy shock)💜",
+    "Chúc HN thiệt nhiều niềm vui, hạnh phúc và yêu thương",
+    "Luôn dịu dàng, nhưng cũng mạnh mẽ khi cần nha",
+    "Bạn là một người đặc biệt – với chính bạn và với mình nữa",
+    "Mong bạn luôn sống thật với lòng mình, không cần gồng gánh quá nhiều nữa",
+    "Cười nhiều hơn nữa, vui nhiều chút",
+    "Ờm vẫn chịu được tính sáng nắng chiều mưa tối hên xui của mình",
+    "Xin kảm ơn",
+    "Dù mình không ở gần – nhưng mà yên tâm, vẫn nhớ HN",
+    "Thật sự may mắn vì gặp đc HN :>>>",
+    "Lâu lâu thấy như mẹ thật -.-",
+    "Nhưng mà do đó chắc chắn HN là duy nhất :D thân nhất",
+    "Nên chắc chắn là HN xứng đáng với thất nhiều điều tốt đẹp :3",
+    "Khi mệt mỏi thì hãy nghỉ ngơi đê",
+    "Ăn tốt ngủ ngon ngủ đúng giờ bảo toàn long thể",
+    "Ở hơi xa nên cũng mong ai đấy update nhiều tý còn biết tình hình",
+    "Cũng mong sẽ luôn tỏa sáng với ánh Dương :DDDDDD",
+    "19 tuổi rồi he, ơ hết năm nhất r à -.-",
+    "Tiếp tục vững bước trên con đường đã chọn nhé ._.",
+    "Chúc cho 19 tuổi mỗi ngày một niềm vui, ngày nèo cũng dui",
+    "Ncl happy happy birthday",
+    "BFF",
+    "Sống vui sống khỏe sống an nhàn",
+    "Nguyện mọi điều đẹp đẽ nhất sẽ tới với HN",
+    "Ờm đánh đổi bằng độ khó các môn chuyên ngành ở bkhoa nha :))",
+    "Hy vọng chúng mình mãi là bạn thân nhất :D",
+    "Hết rồi",
+    "Trong trường hợp xấu nhất thì code này nó sẽ bị ngu",
+    "Thông cảm người học lần đầu",
+    "Chờ khi nào giỏi hơn sẽ thử làm tý IOT :>>",
+    "May your days be filled with joy and your nights with gentle dreams",
   ];
-
   const blessingBox = document.getElementById('blessing-box');
   let currentLine = 0;
   let currentChar = 0;
@@ -313,16 +281,16 @@
           currentLine++;
           currentChar = 0;
           isTyping = false;
-          setTimeout(typeNextChar, 1919); // delay giữa dòng
+          setTimeout(typeNextChar, 1919);
         }
-      }, 19); // tốc độ gõ từng chữ
+      }, 19);
     }
   }
 
   function showCard() {
     document.getElementById('intro').style.display = 'none';
     document.getElementById('card').classList.add('active');
-    setTimeout(typeNextChar, 500); // bắt đầu gõ sau khi hiện giao diện
+    setTimeout(typeNextChar, 500);
   }
 </script>
 
