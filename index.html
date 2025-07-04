@@ -2,16 +2,16 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title> Thiệp Sinh Nhật – Hồng Ngọc</title>
+  <title>Thiệp Sinh Nhật – Hồng Ngọc</title>
   <style>
     html, body {
       margin: 0;
       padding: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #e0bbf7, #c2e4ff); 
+      background: linear-gradient(135deg, #e0bbf7, #c2e4ff);
       overflow-x: hidden;
     }
-    .intro, .card {
+    .intro, .music, .card {
       position: absolute;
       width: 100%;
       height: 100vh;
@@ -19,19 +19,21 @@
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      transition: 1s ease;
+      opacity: 1;
+      transition: opacity 1s ease;
     }
-    .intro {
+    .intro, .music {
       background: url("bg.png") no-repeat center center fixed;
       background-size: cover;
       z-index: 10;
     }
-    .intro h1 {
+    .intro h1, .music h1 {
       color: #7c3aed;
       font-size: 28px;
       margin-bottom: 20px;
+      text-align: center;
     }
-    .intro button {
+    .intro button, .music button {
       padding: 12px 24px;
       font-size: 16px;
       border: none;
@@ -41,14 +43,18 @@
       cursor: pointer;
       transition: background 0.3s;
     }
-    .intro button:hover {
+    .intro button:hover, .music button:hover {
       background-color: #7c3aed;
+    }
+    .music {
+      display: none;
+      z-index: 9;
     }
     .card {
       opacity: 0;
       pointer-events: none;
-      flex-direction: column;
       text-align: center;
+      transition: opacity 1s ease;
     }
     .card.active {
       opacity: 1;
@@ -68,9 +74,6 @@
       color: #374151;
       margin: 10px 20px;
       max-width: 500px;
-    }
-    audio {
-      margin-top: 10px;
     }
     .heart {
       position: fixed;
@@ -115,20 +118,24 @@
 </head>
 <body>
 
-<!-- Phần mở đầu -->
+<!-- Trang 1: Intro -->
 <div class="intro" id="intro">
   <h1>🎈 19 tuổi rồi hè! Nhấn vào đây nè 🎈</h1>
-  <button onclick="showCard()">Nhấn vào đây đi</button>
+  <button onclick="goToMusicPage()">Nhấn vào đây đi</button>
 </div>
 
-<!-- Phần thiệp -->
+<div class="music" id="music">
+  <h1>😏 Tưởng tới đó thôi à, nhấn tiếp đi 😏</h1>
+  <button onclick="startCard()">Nhấn tiếp đi</button>
+</div>
+
+<!-- Trang 3: Thiệp -->
 <div class="card" id="card">
   <img src="2dua.jpg" alt="Hai đứa mình 💕">
   <h2>🎂 Chúc mừng sinh nhật bạn của mình 🎂</h2>
   <div id="blessing-box" style="max-width: 600px; text-align: left;"></div>
-  <audio controls autoplay loop>
+  <audio id="bg-music" loop>
     <source src="be-friend-forever.mp3" type="audio/mp3">
-    Trình duyệt không hỗ trợ nhạc nền.
   </audio>
 </div>
 
@@ -179,14 +186,12 @@
       this.alpha = 1;
       this.gravity = 0.03;
     }
-
     update() {
       this.x += this.vx;
       this.y += this.vy;
       this.vy += this.gravity;
       this.alpha -= 0.01;
     }
-
     draw() {
       ctx.globalAlpha = this.alpha;
       ctx.beginPath();
@@ -222,7 +227,7 @@
   animate();
 </script>
 
-<!-- Xử lý hiển thị -->
+<!-- Hiển thị chúc mừng -->
 <script>
   const blessingLines = [
     "Hôm nay trời xanh mây trắng nắng vàng, là sn của HN🎉",
@@ -256,7 +261,7 @@
     "Trong trường hợp xấu nhất thì code này nó sẽ bị ngu",
     "Thông cảm người học lần đầu",
     "Chờ khi nào giỏi hơn sẽ thử làm tý IOT :>>",
-    "May your days be filled with joy and your nights with gentle dreams",
+    "May your days be filled with joy and your nights with gentle dreams"
   ];
   const blessingBox = document.getElementById('blessing-box');
   let currentLine = 0;
@@ -267,6 +272,7 @@
     if (currentLine >= blessingLines.length) return;
     if (!isTyping) {
       isTyping = true;
+      blessingBox.innerHTML = '';
       const p = document.createElement('p');
       blessingBox.appendChild(p);
 
@@ -287,10 +293,36 @@
     }
   }
 
-  function showCard() {
-    document.getElementById('intro').style.display = 'none';
-    document.getElementById('card').classList.add('active');
-    setTimeout(typeNextChar, 500);
+  function goToMusicPage() {
+    document.getElementById('intro').style.opacity = 0;
+    setTimeout(() => {
+      document.getElementById('intro').style.display = 'none';
+      document.getElementById('music').style.display = 'flex';
+    }, 1000);
+  }
+
+  function startCard() {
+    document.getElementById('music').style.opacity = 0;
+    const audio = document.getElementById('bg-music');
+    audio.volume = 0;
+    audio.play();
+
+    // Nhạc fade-in trong 2 giây
+    let vol = 0;
+    const fadeIn = setInterval(() => {
+      if (vol < 1) {
+        vol += 0.05;
+        audio.volume = Math.min(vol, 1);
+      } else {
+        clearInterval(fadeIn);
+      }
+    }, 100);
+
+    setTimeout(() => {
+      document.getElementById('music').style.display = 'none';
+      document.getElementById('card').classList.add('active');
+      setTimeout(typeNextChar, 500);
+    }, 1000);
   }
 </script>
 
