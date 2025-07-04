@@ -163,15 +163,8 @@
 
     function playMusic() {
       if (!isMusicPlaying) {
-        audio.volume = 0;
         audio.play().then(() => {
           isMusicPlaying = true;
-          let vol = 0;
-          const fade = setInterval(() => {
-            vol += 0.05;
-            if (vol >= 1) clearInterval(fade);
-            audio.volume = Math.min(vol, 1);
-          }, 200);
         }).catch(err => {
           console.error("Không phát được nhạc:", err);
         });
