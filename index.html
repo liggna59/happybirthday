@@ -12,15 +12,23 @@
       font-family: 'Dancing Script', cursive;
     }
 
-    #background-video {
+    #background {
       position: fixed;
-      right: 0;
-      bottom: 0;
-      min-width: 100vw;
-      min-height: 100vh;
-      z-index: -3;
-      object-fit: cover;
-      filter: brightness(0.8) contrast(1.1);
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: url('bg.png') no-repeat center center fixed;
+      background-size: cover;
+      z-index: -2;
+      animation: animateBg 15s infinite linear;
+      filter: brightness(0.9) contrast(1.1);
+    }
+
+    @keyframes animateBg {
+      0% { background-position: 0% 0%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 0%; }
     }
 
     .bling {
@@ -39,30 +47,22 @@
       50% { opacity: 1; transform: scale(1.4); }
     }
 
-    .photo-frame {
-      position: relative;
-      border: 4px solid #fff;
-      border-radius: 16px;
-      box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
-      padding: 8px;
-      background: rgba(255,255,255,0.2);
-      backdrop-filter: blur(3px);
-    }
-
     .page {
       position: absolute;
       top: 0; left: 0;
       width: 100vw;
       height: 100vh;
-      display: none;
+      opacity: 0;
+      display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
+      pointer-events: none;
       transition: opacity 1s ease;
     }
     .page.show {
-      display: flex;
       opacity: 1;
+      pointer-events: all;
     }
     .btn {
       padding: 12px 24px;
@@ -111,10 +111,8 @@
   </style>
 </head>
 <body>
-  <video autoplay muted loop id="background-video">
-    <source src="background-video.mp4" type="video/mp4">
-    Trình duyệt của bạn không hỗ trợ video nền.
-  </video>
+  <div id="background"></div>
+  <button id="musicToggle" class="btn" style="position: fixed; top: 20px; right: 20px; z-index: 10;">🔈</button>
 
   <script>
     for (let i = 0; i < 80; i++) {
@@ -133,19 +131,17 @@
   </audio>
 
   <div class="page show" id="page1">
-    <h2>🎈 19 tuổi rồi hè! Nhấn vào đây nè 🎈</h2>
-    <button class="btn" onclick="nextPage(2)">Nhấn vào đây đi</button>
+    <h2>🎈 19 tuổi rồi nhể! Nhanh thế! Nhấn vào đây nè 🎈</h2>
+    <button class="btn" onclick="nextPage(2)">Click dô đây để tìm hiểu thêm</button>
   </div>
 
   <div class="page" id="page2">
-    <h2 id="teaseText">😏 Tưởng thế là xong à, nhấn tiếp đi 😏</h2>
-    <button class="btn" onclick="teaseClick()">Nhấn tiếp</button>
+    <h2 id="teaseText">😏 Tưởng thế là xong à, tiếp đê 😏</h2>
+    <button class="btn" onclick="teaseClick()">Hihihi hehehehehehe</button>
   </div>
 
   <div class="page" id="page3">
-    <div class="photo-frame">
-      <img src="2dua.jpg" alt="Hai đứa mình 💕" style="width:300px; border-radius:12px;">
-    </div>
+    <img src="2dua.jpg" alt="Hai đứa mình 💕" style="width:300px; border-radius:12px; margin-bottom:20px;">
     <h2 class="title">🎂 Chúc mừng sinh nhật Hồng Ngọc 🎂</h2>
     <div id="blessing-box" style="max-width: 600px;"></div>
   </div>
@@ -153,7 +149,61 @@
   <canvas class="firework" id="fireworks"></canvas>
 
   <script>
-    const blessings = [
+    const text = [
+      "😏 Hnhu bị lỗi rồi đó, tiếp đi 😏",
+      "🙄 Thấy cũng cũng rồi đó, chắc do non tay load hơi lâu 🙄",
+      "😝 Ơ còn à, chắc lần cuối rồi đó,  chắc chắn😝",
+      "🤭 Hãy sống kiên nhẫn lên nèo, kiên nhẫn là tốt, là liều thuốc cho sức khỏe và tinh thần chạy deadline 🤭",
+      "🥳 Roài thôi không thách thức nữa, để chuyển qua ndung chính 🥳",
+      "🤣 Hnhu ctrinh lỗi rồi, chết rồi biết lsao đâyyyy🤣",
+      "😜 Chờ tý đi, đang sửa nốt, chắc vậy (hoặc thách thức lòng kiên nhẫn) 😜",
+      "🥰 Đến đc tận đây rồi cũng tốt đó, hê hê, ncl không đùa nữa đâu, chơi thật này",
+      "😇 Lần này legit nha, ko troll troll nữa, ko nhấn là tiếc",
+      "🎉 Đây là click cuối cùng thật luôn, bắt đầu thiệt nàooo! 🎉"
+    ];
+    let teaseCount = 0;
+    function teaseClick() {
+      document.getElementById("teaseText").innerText = text[teaseCount] || "🤖 Code lỗi rồi bạn ei";
+      teaseCount++;
+      if (teaseCount === 10) {
+        nextPage(3);
+        startTyping();
+        playMusic();
+      }
+    }
+
+    function nextPage(n) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('show'));
+      setTimeout(() => {
+        document.getElementById(`page${n}`).classList.add('show');
+      }, 100);
+    }
+
+    function playMusic() {
+      const audio = document.getElementById('bg-music');
+      audio.volume = 0;
+      audio.play();
+      let vol = 0;
+      const fade = setInterval(() => {
+        vol += 0.05;
+        if (vol >= 1) clearInterval(fade);
+        audio.volume = Math.min(vol, 1);
+      }, 200);
+    }
+
+    const musicToggle = document.getElementById("musicToggle");
+    musicToggle.addEventListener("click", () => {
+      const audio = document.getElementById("bg-music");
+      if (audio.paused) {
+        audio.play();
+        musicToggle.textContent = "🔈";
+      } else {
+        audio.pause();
+        musicToggle.textContent = "🔇";
+      }
+    });
+
+    const blessingLines = [
       "Hôm nay trời xanh mây trắng nắng vàng, là sn của HN🎉",
       "19 tuổi rồi đó, nhanh thế (vẫn đang tự thấy shock)💜",
       "Chúc HN thiệt nhiều niềm vui, hạnh phúc và yêu thương",
@@ -189,47 +239,12 @@
       "Tận hưởng đi vì nốt năm nữa U30 rồi đó :D"
     ];
 
-    let teaseCount = 0;
-    function teaseClick() {
-      const texts = [
-        "😏 Nhấn tiếp nữa đi 😏",
-        "🙄 Vẫn chưa xong đâu 🙄",
-        "😝 Gần tới rồi 😝",
-        "🤭 Lần cuối nha 🤭",
-        "🥳 Ok vào nội dung chính nào! 🥳"
-      ];
-      document.getElementById("teaseText").innerText = texts[teaseCount];
-      teaseCount++;
-      if (teaseCount === 5) {
-        nextPage(3);
-        startTyping();
-        playMusic();
-      }
-    }
-
-    function nextPage(n) {
-      document.querySelectorAll('.page').forEach(p => p.classList.remove('show'));
-      document.getElementById(`page${n}`).classList.add('show');
-    }
-
-    function playMusic() {
-      const audio = document.getElementById('bg-music');
-      audio.volume = 0;
-      audio.play();
-      let vol = 0;
-      const fade = setInterval(() => {
-        vol += 0.05;
-        if (vol >= 1) clearInterval(fade);
-        audio.volume = Math.min(vol, 1);
-      }, 200);
-    }
-
+    let currentLine = 0;
     function startTyping() {
       const box = document.getElementById("blessing-box");
-      let currentLine = 0;
       function typeLine() {
-        if (currentLine >= blessings.length) return;
-        let text = blessings[currentLine];
+        if (currentLine >= blessingLines.length) return;
+        let text = blessingLines[currentLine];
         let i = 0;
         const p = document.createElement("p");
         box.innerHTML = "";
@@ -239,19 +254,38 @@
           i++;
           if (i >= text.length) {
             clearInterval(interval);
-            currentLine++;
-            setTimeout(typeLine, 2000);
+            setTimeout(() => {
+              currentLine++;
+              typeLine();
+            }, 2000);
           }
         }, 40);
       }
       typeLine();
     }
 
-    // Firework animation giữ nguyên
+    function createFalling(symbol, duration) {
+      const el = document.createElement('div');
+      el.className = 'falling';
+      el.textContent = symbol;
+      el.style.left = Math.random() * 100 + "vw";
+      el.style.top = "-50px";
+      el.style.animationDuration = duration + "s";
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), duration * 1000);
+    }
+    setInterval(() => createFalling("🌸", 10 + Math.random() * 10), 700);
+    setInterval(() => createFalling("❄️", 10 + Math.random() * 10), 900);
+    setInterval(() => createFalling("⭐", 5 + Math.random() * 8), 500);
+
     const canvas = document.getElementById("fireworks");
     const ctx = canvas.getContext("2d");
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+    window.addEventListener("resize", () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
     let particles = [];
 
     function FireworkParticle(x, y, color) {
