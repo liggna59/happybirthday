@@ -11,20 +11,11 @@
       50% { transform: scale(1.05); opacity: 0.85; }
     }
     @keyframes shake {
-      0%   { transform: translateX(0); }
-      25%  { transform: translateX(-3px); }
-      50%  { transform: translateX(3px); }
-      75%  { transform: translateX(-2px); }
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-3px); }
+      50% { transform: translateX(3px); }
+      75% { transform: translateX(-2px); }
       100% { transform: translateX(0); }
-    }
-
-    .music h1 {
-      animation: pulse 2.5s infinite;
-      text-align: center;
-    }
-
-    .music button {
-      animation: shake 1.8s infinite;
     }
 
     html, body {
@@ -34,7 +25,6 @@
       background: linear-gradient(135deg, #e0bbf7, #c2e4ff);
       overflow-x: hidden;
     }
-
     .intro, .music, .card {
       position: absolute;
       width: 100%;
@@ -46,20 +36,18 @@
       opacity: 1;
       transition: opacity 1s ease;
     }
-
     .intro, .music {
       background: url("bg.png") no-repeat center center fixed;
       background-size: cover;
       z-index: 10;
     }
-
     .intro h1, .music h1 {
       color: #7c3aed;
       font-size: 28px;
       margin-bottom: 20px;
       text-align: center;
+      animation: pulse 2.5s infinite;
     }
-
     .intro button, .music button {
       padding: 12px 24px;
       font-size: 16px;
@@ -69,52 +57,42 @@
       color: white;
       cursor: pointer;
       transition: background 0.3s;
+      animation: shake 1.8s infinite;
     }
-
     .intro button:hover, .music button:hover {
       background-color: #7c3aed;
     }
-
     .music {
       display: none;
+      opacity: 0;
       z-index: 9;
     }
-
     .card {
       opacity: 0;
       pointer-events: none;
       text-align: center;
       transition: opacity 1s ease;
     }
-
     .card.active {
       opacity: 1;
       pointer-events: all;
       z-index: 5;
     }
-
     .card img {
       width: 300px;
       border-radius: 12px;
       margin-bottom: 20px;
     }
-
     .card h2 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 32px;
       color: #6d28d9;
-      letter-spacing: 1px;
-      text-transform: uppercase;
+      font-size: 24px;
+      font-family: 'Bebas Neue', sans-serif;
     }
-
     .card p {
-      font-family: 'Dancing Script', cursive;
       color: #374151;
-      font-size: 22px;
       margin: 10px 20px;
       max-width: 500px;
     }
-
     .heart {
       position: fixed;
       width: 20px;
@@ -123,7 +101,6 @@
       transform: rotate(45deg);
       animation: fall 6s linear infinite;
     }
-
     .heart::before, .heart::after {
       content: '';
       position: absolute;
@@ -132,27 +109,22 @@
       background: pink;
       border-radius: 50%;
     }
-
     .heart::before { top: -10px; left: 0; }
     .heart::after  { top: 0; left: -10px; }
-
     @keyframes fall {
       0% { transform: translateY(-100px) rotate(45deg); opacity: 1; }
       100% { transform: translateY(100vh) rotate(45deg); opacity: 0; }
     }
-
     .flower {
       position: absolute;
       font-size: 22px;
       animation: fly 12s linear infinite;
       z-index: 0;
     }
-
     @keyframes fly {
       0% { transform: translateY(-50px) rotate(0); opacity: 1; }
       100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
     }
-
     canvas {
       position: fixed;
       top: 0;
@@ -164,7 +136,6 @@
 </head>
 <body>
 
-<!-- Trang 1: Intro -->
 <div class="intro" id="intro">
   <h1>🎈 19 tuổi rồi hè! Nhấn vào đây nè 🎈</h1>
   <button onclick="goToMusicPage()">Nhấn vào đây đi</button>
@@ -175,9 +146,8 @@
   <button onclick="startCard()">Nhấn tiếp đi</button>
 </div>
 
-<!-- Trang 3: Thiệp -->
 <div class="card" id="card">
-  <img src="2dua.jpg" alt="Hai đứa mình ❤️">
+  <img src="2dua.jpg" alt="Hai đứa mình 💕">
   <h2>🎂 Chúc mừng sinh nhật bạn của mình 🎂</h2>
   <div id="blessing-box" style="max-width: 600px; text-align: left;"></div>
   <audio id="bg-music" loop>
@@ -185,8 +155,7 @@
   </audio>
 </div>
 
-<!-- Lớp phủ yêu cầu tương tác đầu tiên -->
-<div id="click-to-start" style="position: fixed; z-index: 9999; width: 100vw; height: 100vh; background: rgba(255, 255, 255, 0.9); display: flex; justify-content: center; align-items: center; flex-direction: column;">
+<div id="click-to-start" style="position: fixed; z-index: 9999; width: 100vw; height: 100vh; background: rgba(255,255,255,0.9); display: flex; justify-content: center; align-items: center; flex-direction: column;">
   <h2 style="font-size: 24px; color: #6d28d9;">🎉 Nhấn để bắt đầu trải nghiệm 🎉</h2>
   <button onclick="unlockAudio()" style="padding: 12px 24px; font-size: 16px; border: none; border-radius: 8px; background-color: #8b5cf6; color: white; cursor: pointer; margin-top: 20px;">Bắt đầu ngay</button>
 </div>
@@ -203,6 +172,71 @@
       });
     }
     document.getElementById('click-to-start').style.display = 'none';
+  }
+
+  function goToMusicPage() {
+    document.getElementById('intro').style.opacity = 0;
+    setTimeout(() => {
+      document.getElementById('intro').style.display = 'none';
+      const musicPage = document.getElementById('music');
+      musicPage.style.display = 'flex';
+      musicPage.style.opacity = 1;
+    }, 1000);
+  }
+
+  function startCard() {
+    document.getElementById('music').style.opacity = 0;
+    const audio = document.getElementById('bg-music');
+    audio.volume = 0;
+    audio.play();
+    let vol = 0;
+    const fadeIn = setInterval(() => {
+      if (vol < 1) {
+        vol += 0.05;
+        audio.volume = Math.min(vol, 1);
+      } else {
+        clearInterval(fadeIn);
+      }
+    }, 100);
+    setTimeout(() => {
+      document.getElementById('music').style.display = 'none';
+      document.getElementById('card').classList.add('active');
+      setTimeout(typeNextChar, 500);
+    }, 1000);
+  }
+
+  const blessingLines = [
+    "Hôm nay trời xanh mây trắng nắng vàng, là sn của HN🎉",
+    "19 tuổi rồi đó, nhanh thế (vẫn đang tự thấy shock)💜",
+    "...", // rút gọn phần lời chúc cho ngắn
+  ];
+  const blessingBox = document.getElementById('blessing-box');
+  let currentLine = 0;
+  let currentChar = 0;
+  let isTyping = false;
+
+  function typeNextChar() {
+    if (currentLine >= blessingLines.length) return;
+    if (!isTyping) {
+      isTyping = true;
+      blessingBox.innerHTML = '';
+      const p = document.createElement('p');
+      blessingBox.appendChild(p);
+      const line = blessingLines[currentLine];
+      let typed = '';
+      const typeInterval = setInterval(() => {
+        typed += line[currentChar];
+        p.innerText = typed;
+        currentChar++;
+        if (currentChar === line.length) {
+          clearInterval(typeInterval);
+          currentLine++;
+          currentChar = 0;
+          isTyping = false;
+          setTimeout(typeNextChar, 1919);
+        }
+      }, 19);
+    }
   }
 
   function createHeart() {
@@ -229,7 +263,6 @@
   const ctx = canvas.getContext('2d');
   canvas.width = innerWidth;
   canvas.height = innerHeight;
-
   class Particle {
     constructor(x, y, color) {
       this.x = x;
@@ -258,9 +291,7 @@
       ctx.globalAlpha = 1;
     }
   }
-
   let particles = [];
-
   function createFirework() {
     const x = Math.random() * canvas.width;
     const y = Math.random() * canvas.height / 2;
@@ -269,7 +300,6 @@
       particles.push(new Particle(x, y, color));
     }
   }
-
   function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     particles.forEach((p, i) => {
@@ -279,68 +309,8 @@
     });
     requestAnimationFrame(animate);
   }
-
   setInterval(createFirework, 2000);
   animate();
-
-  const blessingLines = [...]; // giữ nguyên như cũ
-  const blessingBox = document.getElementById('blessing-box');
-  let currentLine = 0;
-  let currentChar = 0;
-  let isTyping = false;
-
-  function typeNextChar() {
-    if (currentLine >= blessingLines.length) return;
-    if (!isTyping) {
-      isTyping = true;
-      const p = document.createElement('p');
-      p.className = 'handwritten';
-      blessingBox.appendChild(p);
-      const line = blessingLines[currentLine];
-      let typed = '';
-      const typeInterval = setInterval(() => {
-        typed += line[currentChar];
-        p.innerText = typed;
-        currentChar++;
-        if (currentChar === line.length) {
-          clearInterval(typeInterval);
-          currentLine++;
-          currentChar = 0;
-          isTyping = false;
-          setTimeout(typeNextChar, 1919);
-        }
-      }, 19);
-    }
-  }
-
-  function goToMusicPage() {
-    document.getElementById('intro').style.opacity = 0;
-    setTimeout(() => {
-      document.getElementById('intro').style.display = 'none';
-      document.getElementById('music').style.display = 'flex';
-    }, 1000);
-  }
-
-  function startCard() {
-    document.getElementById('music').style.opacity = 0;
-    const audio = document.getElementById('bg-music');
-    audio.volume = 0;
-    audio.play();
-    let vol = 0;
-    const fadeIn = setInterval(() => {
-      if (vol < 1) {
-        vol += 0.05;
-        audio.volume = Math.min(vol, 1);
-      } else {
-        clearInterval(fadeIn);
-      }
-    }, 100);
-    setTimeout(() => {
-      document.getElementById('music').style.display = 'none';
-      document.getElementById('card').classList.add('active');
-      setTimeout(typeNextChar, 500);
-    }, 1000);
-  }
 </script>
 <canvas id="fireworks"></canvas>
 </body>
