@@ -144,54 +144,12 @@
 <div class="card" id="card">
   <img src="2dua.jpg" alt="Hai đứa mình 💕">
   <h2>🎂 Chúc mừng sinh nhật bạn của mình 🎂</h2>
-
-  <p>1. Hôm nay là sinh nhật bạn – người mình thương quý suốt mấy năm qua 🎉</p>
-  <p>2. 19 tuổi rồi đó, bạn nớ lớn thật rồi hen 💜</p>
-  <p>3. Mình chúc bạn thiệt nhiều niềm vui, hạnh phúc và yêu thương</p>
-  <p>4. Chúc bạn luôn dịu dàng, nhưng cũng mạnh mẽ khi cần nha</p>
-  <p>5. Bạn là một người đặc biệt – với chính bạn và với mình nữa</p>
-  <p>6. Mong bạn luôn sống thật với lòng mình, không cần gồng gánh điều chi</p>
-  <p>7. Bạn với mình đi qua 7-8 năm trời rồi, có chi cũng đáng trân quý thiệt</p>
-  <p>8. Nhớ mấy lần mình buồn, bạn chẳng nói nhiều mà vẫn ở đó, thầm lặng</p>
-  <p>9. Mình cảm ơn bạn vì những lần như rứa 🥹</p>
-  <p>10. Dù mình không ở gần – nhưng lòng thì luôn nhớ bạn</p>
-  <p>11. Nhìn lại, thấy thiệt may mắn vì có bạn bên cạnh thời ấy</p>
-  <p>12. Bạn giống mẹ mình lắm – từ cái cách quan tâm nhẹ nhàng 🫶</p>
-  <p>13. Nhưng bạn còn là bạn mình – duy nhất, riêng biệt và không thay thế được</p>
-  <p>14. Mình mong bạn luôn thấy được giá trị của bản thân mình</p>
-  <p>15. Và biết rằng: bạn xứng đáng với những điều thật tốt đẹp</p>
-  <p>16. Nếu bạn thấy mỏi, cứ nghỉ một chút, có mình ở đây nè</p>
-  <p>17. Có thể không giỏi nói lời ngọt ngào – nhưng lòng mình luôn ấm áp cho bạn</p>
-  <p>18. Mong bạn sẽ nhận được thật nhiều yêu thương – và không cần nghi ngờ chi cả</p>
-  <p>19. Có chuyện gì cũng đừng giấu mình nha</p>
-  <p>20. Mình sẵn lòng nghe, không cần lời giải thích, chỉ cần bạn nói</p>
-  <p>21. 19 tuổi là vừa đủ chín để mơ tiếp, vừa đủ trẻ để bắt đầu</p>
-  <p>22. Mình mong bạn vẫn giữ trong lòng những ước mơ của bạn nớ</p>
-  <p>23. Và đừng quên bạn của bạn nớ luôn ủng hộ bạn hết mình</p>
-  <p>24. Chúc bạn luôn yêu bản thân mình nhiều hơn một chút mỗi ngày</p>
-  <p>25. Và cười lên thiệt tươi dù đôi lúc có những điều buồn buồn</p>
-  <p>26. Mình tin: bạn là người đáng tin, đáng yêu và đáng thương</p>
-  <p>27. Không cần phải hoàn hảo – bạn như ri đã đủ để mình thương rồi</p>
-  <p>28. Mong mỗi mùa sinh nhật, bạn lại trưởng thành thêm một chút… mà vẫn ngây thơ như cũ</p>
-  <p>29. Mỗi năm một chút vui mới, một ít bình yên cũ</p>
-  <p>30. Và nếu có ai làm bạn buồn – mình sẽ là người giữ lấy bạn lại</p>
-  <p>31. Tình bạn của tụi mình – hy vọng là lâu dài, thiệt lâu</p>
-  <p>32. Như mùa hè nối mùa thu, như ngày nắng ấm dắt tay ngày mưa</p>
-  <p>33. Bạn là người mình nghĩ tới mỗi khi nhớ nhà, nhớ lớp, nhớ thời áo trắng</p>
-  <p>34. Và bạn là người mình nghĩ tới mỗi khi thấy ai đó giống bạn</p>
-  <p>35. Mình mong bạn biết: có mình luôn dõi theo bạn, từ xa cũng được</p>
-  <p>36. Ở đâu đó giữa thế giới này, bạn có một người thương bạn… là mình</p>
-  <p>37. Happy Birthday – to my precious friend, my “bạn nớ” 💌</p>
-  <p>38. May your days be filled with joy and your nights with gentle dreams</p>
-  <p>39. Cảm ơn bạn đã lớn lên cùng mình</p>
-  <p>40. Và cảm ơn bạn đã là “bạn của mình” – thiệt lòng ♥️</p>
-
+  <div id="blessing-box" style="max-width: 600px; text-align: left;"></div>
   <audio controls autoplay loop>
     <source src="be-friend-forever.mp3" type="audio/mp3">
-    Trình duyệt của bạn không hỗ trợ nhạc nền.
+    Trình duyệt không hỗ trợ nhạc nền.
   </audio>
 </div>
-
 <!-- Tim rơi -->
 <script>
   function createHeart() {
@@ -287,6 +245,84 @@
   function showCard() {
     document.getElementById('intro').style.display = 'none';
     document.getElementById('card').classList.add('active');
+  }
+<script>
+  const blessingLines = [
+    "1. Hôm nay là sinh nhật bạn – người mình thương quý suốt mấy năm qua 🎉",
+    "2. 19 tuổi rồi đó, bạn nớ lớn thật rồi hen 💜",
+    "3. Mình chúc bạn thiệt nhiều niềm vui, hạnh phúc và yêu thương",
+    "4. Chúc bạn luôn dịu dàng, nhưng cũng mạnh mẽ khi cần nha",
+    "5. Bạn là một người đặc biệt – với chính bạn và với mình nữa",
+    "6. Mong bạn luôn sống thật với lòng mình, không cần gồng gánh điều chi",
+    "7. Bạn với mình đi qua 7-8 năm trời rồi, có chi cũng đáng trân quý thiệt",
+    "8. Nhớ mấy lần mình buồn, bạn chẳng nói nhiều mà vẫn ở đó, thầm lặng",
+    "9. Mình cảm ơn bạn vì những lần như rứa 🥹",
+    "10. Dù mình không ở gần – nhưng lòng thì luôn nhớ bạn",
+    "11. Nhìn lại, thấy thiệt may mắn vì có bạn bên cạnh thời ấy",
+    "12. Bạn giống mẹ mình lắm – từ cái cách quan tâm nhẹ nhàng 🫶",
+    "13. Nhưng bạn còn là bạn mình – duy nhất, riêng biệt và không thay thế được",
+    "14. Mình mong bạn luôn thấy được giá trị của bản thân mình",
+    "15. Và biết rằng: bạn xứng đáng với những điều thật tốt đẹp",
+    "16. Nếu bạn thấy mỏi, cứ nghỉ một chút, có mình ở đây nè",
+    "17. Có thể không giỏi nói lời ngọt ngào – nhưng lòng mình luôn ấm áp cho bạn",
+    "18. Mong bạn sẽ nhận được thật nhiều yêu thương – và không cần nghi ngờ chi cả",
+    "19. Có chuyện gì cũng đừng giấu mình nha",
+    "20. Mình sẵn lòng nghe, không cần lời giải thích, chỉ cần bạn nói",
+    "21. 19 tuổi là vừa đủ chín để mơ tiếp, vừa đủ trẻ để bắt đầu",
+    "22. Mình mong bạn vẫn giữ trong lòng những ước mơ của bạn nớ",
+    "23. Và đừng quên bạn của bạn nớ luôn ủng hộ bạn hết mình",
+    "24. Chúc bạn luôn yêu bản thân mình nhiều hơn một chút mỗi ngày",
+    "25. Và cười lên thiệt tươi dù đôi lúc có những điều buồn buồn",
+    "26. Mình tin: bạn là người đáng tin, đáng yêu và đáng thương",
+    "27. Không cần phải hoàn hảo – bạn như ri đã đủ để mình thương rồi",
+    "28. Mong mỗi mùa sinh nhật, bạn lại trưởng thành thêm một chút… mà vẫn ngây thơ như cũ",
+    "29. Mỗi năm một chút vui mới, một ít bình yên cũ",
+    "30. Và nếu có ai làm bạn buồn – mình sẽ là người giữ lấy bạn lại",
+    "31. Tình bạn của tụi mình – hy vọng là lâu dài, thiệt lâu",
+    "32. Như mùa hè nối mùa thu, như ngày nắng ấm dắt tay ngày mưa",
+    "33. Bạn là người mình nghĩ tới mỗi khi nhớ nhà, nhớ lớp, nhớ thời áo trắng",
+    "34. Và bạn là người mình nghĩ tới mỗi khi thấy ai đó giống bạn",
+    "35. Mình mong bạn biết: có mình luôn dõi theo bạn, từ xa cũng được",
+    "36. Ở đâu đó giữa thế giới này, bạn có một người thương bạn… là mình",
+    "37. Happy Birthday – to my precious friend, my “bạn nớ” 💌",
+    "38. May your days be filled with joy and your nights with gentle dreams",
+    "39. Cảm ơn bạn đã lớn lên cùng mình",
+    "40. Và cảm ơn bạn đã là “bạn của mình” – thiệt lòng ♥️"
+  ];
+
+  const blessingBox = document.getElementById('blessing-box');
+  let currentLine = 0;
+  let currentChar = 0;
+  let isTyping = false;
+
+  function typeNextChar() {
+    if (currentLine >= blessingLines.length) return;
+    if (!isTyping) {
+      isTyping = true;
+      const p = document.createElement('p');
+      blessingBox.appendChild(p);
+
+      const line = blessingLines[currentLine];
+      let typed = '';
+      const typeInterval = setInterval(() => {
+        typed += line[currentChar];
+        p.innerText = typed;
+        currentChar++;
+        if (currentChar === line.length) {
+          clearInterval(typeInterval);
+          currentLine++;
+          currentChar = 0;
+          isTyping = false;
+          setTimeout(typeNextChar, 200); // delay giữa dòng
+        }
+      }, 30); // tốc độ gõ từng chữ
+    }
+  }
+
+  function showCard() {
+    document.getElementById('intro').style.display = 'none';
+    document.getElementById('card').classList.add('active');
+    setTimeout(typeNextChar, 500); // bắt đầu gõ sau khi hiện giao diện
   }
 </script>
 
