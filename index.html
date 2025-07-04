@@ -3,14 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <title>Thiệp Sinh Nhật – Hồng Ngọc</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #e0bbf7, #c2e4ff);
-      overflow-x: hidden;
-    }
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.85; }
+}
+@keyframes shake {
+  0%   { transform: translateX(0); }
+  25%  { transform: translateX(-3px); }
+  50%  { transform: translateX(3px); }
+  75%  { transform: translateX(-2px); }
+  100% { transform: translateX(0); }
+}
+
+/* Áp dụng hiệu ứng cho TRANG NHẠC */
+.music h1 {
+  animation: pulse 2.5s infinite;
+  text-align: center;
+}
+
+.music button {
+  animation: shake 1.8s infinite;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Pacifico', cursive;
+  background: linear-gradient(135deg, #e0bbf7, #c2e4ff);
+  overflow-x: hidden;
+}
     .intro, .music, .card {
       position: absolute;
       width: 100%;
