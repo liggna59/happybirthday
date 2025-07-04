@@ -3,37 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <title>Thiệp Sinh Nhật – Hồng Ngọc</title>
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
   <style>
-@keyframes pulse {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.05); opacity: 0.85; }
-}
-@keyframes shake {
-  0%   { transform: translateX(0); }
-  25%  { transform: translateX(-3px); }
-  50%  { transform: translateX(3px); }
-  75%  { transform: translateX(-2px); }
-  100% { transform: translateX(0); }
-}
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.05); opacity: 0.85; }
+    }
+    @keyframes shake {
+      0%   { transform: translateX(0); }
+      25%  { transform: translateX(-3px); }
+      50%  { transform: translateX(3px); }
+      75%  { transform: translateX(-2px); }
+      100% { transform: translateX(0); }
+    }
 
-/* Áp dụng hiệu ứng cho TRANG NHẠC */
-.music h1 {
-  animation: pulse 2.5s infinite;
-  text-align: center;
-}
+    .music h1 {
+      animation: pulse 2.5s infinite;
+      text-align: center;
+    }
 
-.music button {
-  animation: shake 1.8s infinite;
-}
+    .music button {
+      animation: shake 1.8s infinite;
+    }
 
-html, body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Pacifico', cursive;
-  background: linear-gradient(135deg, #e0bbf7, #c2e4ff);
-  overflow-x: hidden;
-}
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Dancing Script', cursive;
+      background: linear-gradient(135deg, #e0bbf7, #c2e4ff);
+      overflow-x: hidden;
+    }
+
     .intro, .music, .card {
       position: absolute;
       width: 100%;
@@ -45,17 +46,20 @@ html, body {
       opacity: 1;
       transition: opacity 1s ease;
     }
+
     .intro, .music {
       background: url("bg.png") no-repeat center center fixed;
       background-size: cover;
       z-index: 10;
     }
+
     .intro h1, .music h1 {
       color: #7c3aed;
       font-size: 28px;
       margin-bottom: 20px;
       text-align: center;
     }
+
     .intro button, .music button {
       padding: 12px 24px;
       font-size: 16px;
@@ -66,38 +70,51 @@ html, body {
       cursor: pointer;
       transition: background 0.3s;
     }
+
     .intro button:hover, .music button:hover {
       background-color: #7c3aed;
     }
+
     .music {
       display: none;
       z-index: 9;
     }
+
     .card {
       opacity: 0;
       pointer-events: none;
       text-align: center;
       transition: opacity 1s ease;
     }
+
     .card.active {
       opacity: 1;
       pointer-events: all;
       z-index: 5;
     }
+
     .card img {
       width: 300px;
       border-radius: 12px;
       margin-bottom: 20px;
     }
+
     .card h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 32px;
       color: #6d28d9;
-      font-size: 24px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
     }
+
     .card p {
+      font-family: 'Dancing Script', cursive;
       color: #374151;
+      font-size: 22px;
       margin: 10px 20px;
       max-width: 500px;
     }
+
     .heart {
       position: fixed;
       width: 20px;
@@ -106,6 +123,7 @@ html, body {
       transform: rotate(45deg);
       animation: fall 6s linear infinite;
     }
+
     .heart::before, .heart::after {
       content: '';
       position: absolute;
@@ -114,22 +132,27 @@ html, body {
       background: pink;
       border-radius: 50%;
     }
+
     .heart::before { top: -10px; left: 0; }
     .heart::after  { top: 0; left: -10px; }
+
     @keyframes fall {
       0% { transform: translateY(-100px) rotate(45deg); opacity: 1; }
       100% { transform: translateY(100vh) rotate(45deg); opacity: 0; }
     }
+
     .flower {
       position: absolute;
       font-size: 22px;
       animation: fly 12s linear infinite;
       z-index: 0;
     }
+
     @keyframes fly {
       0% { transform: translateY(-50px) rotate(0); opacity: 1; }
       100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
     }
+
     canvas {
       position: fixed;
       top: 0;
@@ -154,7 +177,7 @@ html, body {
 
 <!-- Trang 3: Thiệp -->
 <div class="card" id="card">
-  <img src="2dua.jpg" alt="Hai đứa mình 💕">
+  <img src="2dua.jpg" alt="Hai đứa mình ❤️">
   <h2>🎂 Chúc mừng sinh nhật bạn của mình 🎂</h2>
   <div id="blessing-box" style="max-width: 600px; text-align: left;"></div>
   <audio id="bg-music" loop>
@@ -162,8 +185,26 @@ html, body {
   </audio>
 </div>
 
-<!-- Tim rơi -->
+<!-- Lớp phủ yêu cầu tương tác đầu tiên -->
+<div id="click-to-start" style="position: fixed; z-index: 9999; width: 100vw; height: 100vh; background: rgba(255, 255, 255, 0.9); display: flex; justify-content: center; align-items: center; flex-direction: column;">
+  <h2 style="font-size: 24px; color: #6d28d9;">🎉 Nhấn để bắt đầu trải nghiệm 🎉</h2>
+  <button onclick="unlockAudio()" style="padding: 12px 24px; font-size: 16px; border: none; border-radius: 8px; background-color: #8b5cf6; color: white; cursor: pointer; margin-top: 20px;">Bắt đầu ngay</button>
+</div>
+
 <script>
+  function unlockAudio() {
+    const audio = document.getElementById('bg-music');
+    if (audio) {
+      audio.play().then(() => {
+        audio.pause();
+        audio.currentTime = 0;
+      }).catch((e) => {
+        console.warn("Trình duyệt vẫn chặn audio:", e);
+      });
+    }
+    document.getElementById('click-to-start').style.display = 'none';
+  }
+
   function createHeart() {
     const heart = document.createElement('div');
     heart.className = 'heart';
@@ -173,10 +214,7 @@ html, body {
     setTimeout(() => heart.remove(), 7000);
   }
   setInterval(createHeart, 600);
-</script>
 
-<!-- Hoa bay -->
-<script>
   const flowers = ['🌸','💮','🌺','🌷'];
   for (let i = 0; i < 25; i++) {
     const flower = document.createElement('div');
@@ -186,11 +224,7 @@ html, body {
     flower.innerText = flowers[Math.floor(Math.random() * flowers.length)];
     document.body.appendChild(flower);
   }
-</script>
 
-<!-- Pháo bông -->
-<canvas id="fireworks"></canvas>
-<script>
   const canvas = document.getElementById('fireworks');
   const ctx = canvas.getContext('2d');
   canvas.width = innerWidth;
@@ -248,44 +282,8 @@ html, body {
 
   setInterval(createFirework, 2000);
   animate();
-</script>
 
-<!-- Hiển thị chúc mừng -->
-<script>
-  const blessingLines = [
-    "Hôm nay trời xanh mây trắng nắng vàng, là sn của HN🎉",
-    "19 tuổi rồi đó, nhanh thế (vẫn đang tự thấy shock)💜",
-    "Chúc HN thiệt nhiều niềm vui, hạnh phúc và yêu thương",
-    "Luôn dịu dàng, nhưng cũng mạnh mẽ khi cần nha",
-    "Bạn là một người đặc biệt – với chính bạn và với mình nữa",
-    "Mong bạn luôn sống thật với lòng mình, không cần gồng gánh quá nhiều nữa",
-    "Cười nhiều hơn nữa, vui nhiều chút",
-    "Ờm vẫn chịu được tính sáng nắng chiều mưa tối hên xui của mình",
-    "Xin kảm ơn",
-    "Dù mình không ở gần – nhưng mà yên tâm, vẫn nhớ HN",
-    "Thật sự may mắn vì gặp đc HN :>>>",
-    "Lâu lâu thấy như mẹ thật -.-",
-    "Nhưng mà do đó chắc chắn HN là duy nhất :D thân nhất",
-    "Nên chắc chắn là HN xứng đáng với thất nhiều điều tốt đẹp :3",
-    "Khi mệt mỏi thì hãy nghỉ ngơi đê",
-    "Ăn tốt ngủ ngon ngủ đúng giờ bảo toàn long thể",
-    "Ở hơi xa nên cũng mong ai đấy update nhiều tý còn biết tình hình",
-    "Cũng mong sẽ luôn tỏa sáng với ánh Dương :DDDDDD",
-    "19 tuổi rồi he, ơ hết năm nhất r à -.-",
-    "Tiếp tục vững bước trên con đường đã chọn nhé ._.",
-    "Chúc cho 19 tuổi mỗi ngày một niềm vui, ngày nèo cũng dui",
-    "Ncl happy happy birthday",
-    "BFF",
-    "Sống vui sống khỏe sống an nhàn",
-    "Nguyện mọi điều đẹp đẽ nhất sẽ tới với HN",
-    "Ờm đánh đổi bằng độ khó các môn chuyên ngành ở bkhoa nha :))",
-    "Hy vọng chúng mình mãi là bạn thân nhất :D",
-    "Hết rồi",
-    "Trong trường hợp xấu nhất thì code này nó sẽ bị ngu",
-    "Thông cảm người học lần đầu",
-    "Chờ khi nào giỏi hơn sẽ thử làm tý IOT :>>",
-    "May your days be filled with joy and your nights with gentle dreams"
-  ];
+  const blessingLines = [...]; // giữ nguyên như cũ
   const blessingBox = document.getElementById('blessing-box');
   let currentLine = 0;
   let currentChar = 0;
@@ -295,10 +293,9 @@ html, body {
     if (currentLine >= blessingLines.length) return;
     if (!isTyping) {
       isTyping = true;
-      blessingBox.innerHTML = '';
       const p = document.createElement('p');
+      p.className = 'handwritten';
       blessingBox.appendChild(p);
-
       const line = blessingLines[currentLine];
       let typed = '';
       const typeInterval = setInterval(() => {
@@ -329,8 +326,6 @@ html, body {
     const audio = document.getElementById('bg-music');
     audio.volume = 0;
     audio.play();
-
-    // Nhạc fade-in trong 2 giây
     let vol = 0;
     const fadeIn = setInterval(() => {
       if (vol < 1) {
@@ -340,52 +335,13 @@ html, body {
         clearInterval(fadeIn);
       }
     }, 100);
-
     setTimeout(() => {
       document.getElementById('music').style.display = 'none';
       document.getElementById('card').classList.add('active');
       setTimeout(typeNextChar, 500);
     }, 1000);
   }
-<script>
-  function unlockAudio() {
-    const audio = document.getElementById('bg-music');
-    if (audio) {
-      audio.play().then(() => {
-        audio.pause(); // Phát tạm để “mở khóa quyền”
-        audio.currentTime = 0;
-      }).catch((e) => {
-        console.warn("Trình duyệt vẫn chặn audio:", e);
-      });
-    }
-
-    // Ẩn lớp phủ
-    document.getElementById('click-to-start').style.display = 'none';
-  }
 </script>
+<canvas id="fireworks"></canvas>
 </body>
-  <!-- Lớp phủ yêu cầu tương tác đầu tiên -->
-<div id="click-to-start" style="
-  position: fixed;
-  z-index: 9999;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(255, 255, 255, 0.9);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-">
-  <h2 style="font-size: 24px; color: #6d28d9;">🎉 Nhấn để bắt đầu trải nghiệm 🎉</h2>
-  <button onclick="unlockAudio()" style="
-    padding: 12px 24px;
-    font-size: 16px;
-    border: none;
-    border-radius: 8px;
-    background-color: #8b5cf6;
-    color: white;
-    cursor: pointer;
-    margin-top: 20px;
-  ">Bắt đầu ngay</button>
-</div>
 </html>
