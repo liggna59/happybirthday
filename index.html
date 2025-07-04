@@ -347,7 +347,45 @@ html, body {
       setTimeout(typeNextChar, 500);
     }, 1000);
   }
-</script>
+<script>
+  function unlockAudio() {
+    const audio = document.getElementById('bg-music');
+    if (audio) {
+      audio.play().then(() => {
+        audio.pause(); // Phát tạm để “mở khóa quyền”
+        audio.currentTime = 0;
+      }).catch((e) => {
+        console.warn("Trình duyệt vẫn chặn audio:", e);
+      });
+    }
 
+    // Ẩn lớp phủ
+    document.getElementById('click-to-start').style.display = 'none';
+  }
+</script>
 </body>
+  <!-- Lớp phủ yêu cầu tương tác đầu tiên -->
+<div id="click-to-start" style="
+  position: fixed;
+  z-index: 9999;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+">
+  <h2 style="font-size: 24px; color: #6d28d9;">🎉 Nhấn để bắt đầu trải nghiệm 🎉</h2>
+  <button onclick="unlockAudio()" style="
+    padding: 12px 24px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    background-color: #8b5cf6;
+    color: white;
+    cursor: pointer;
+    margin-top: 20px;
+  ">Bắt đầu ngay</button>
+</div>
 </html>
